@@ -218,7 +218,8 @@ function PlayerComparison() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '50vh',
+          height: '500px',
+          margin: '50px'
         }}>   
           <BarChart chartData={combinedPlayerData}/>
         </div>
