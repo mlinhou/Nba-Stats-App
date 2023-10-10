@@ -43,16 +43,19 @@ function PlayerComparison() {
   var handleSubmit = (e) => {
     e.preventDefault();
     getPlayerId()
-   
-  }
-
-  var handleSubmit2 = (e) => {
-    e.preventDefault();
     getPlayerId2()
     handleCombiningData();
     setisSubmitted(true);
-    
+   
   }
+
+  // var handleSubmit2 = (e) => {
+  //   e.preventDefault();
+  //   getPlayerId2()
+  //   handleCombiningData();
+  //   setisSubmitted(true);
+    
+  // }
   
 
   var handleChange = (event) => {
@@ -169,19 +172,7 @@ function PlayerComparison() {
             placeholder="please enter a year"
             />
           </label>
-          <input type="submit" value="Submit"/>
-        </form>
-        
-        Games played: {playerStats["games_played"]}
-        <br />
-        Points averaged: {playerStats["pts"]}
-        <br />
-        Rebounds averaged: {playerStats["reb"]}
-        <br />
-        Assists averaged: {playerStats["ast"]}
-        
-        {/* Stats for player number 2 */}
-        <form onSubmit={handleSubmit2}>
+          <br/>
           <label>
             Name
             <input
@@ -203,6 +194,40 @@ function PlayerComparison() {
           </label>
           <input type="submit" value="Submit"/>
         </form>
+        <h1>{playerName}</h1>
+        Games played: {playerStats["games_played"]}
+        <br />
+        Points averaged: {playerStats["pts"]}
+        <br />
+        Rebounds averaged: {playerStats["reb"]}
+        <br />
+        Assists averaged: {playerStats["ast"]}
+        <br/>
+        
+        {/* Stats for player number 2 */}
+        {/* <form onSubmit={handleSubmit2}>
+          <label>
+            Name
+            <input
+            type="text"
+            
+            onChange={handleChange2}
+            placeholder="please enter team name"
+            />
+          </label>
+          <br />
+          <label>
+            Season
+            <input 
+            type="text"
+            
+            onChange={handleSeason2}
+            placeholder="please enter a year"
+            />
+          </label>
+          <input type="submit" value="Submit"/>
+        </form> */}
+        <h1>{playerName2}</h1>
         Games played: {playerStats2["games_played"]}
         <br />
         Points averaged: {playerStats2["pts"]}
