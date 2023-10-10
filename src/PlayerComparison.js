@@ -21,8 +21,6 @@ function PlayerComparison() {
 
   const [combinedPlayerData, setCombinedPlayerData] = useState('');
 
-
-
   const [isSubmitted, setisSubmitted] = useState(false);
   
   var handleCombiningData = () => {
@@ -48,15 +46,6 @@ function PlayerComparison() {
     setisSubmitted(true);
    
   }
-
-  // var handleSubmit2 = (e) => {
-  //   e.preventDefault();
-  //   getPlayerId2()
-  //   handleCombiningData();
-  //   setisSubmitted(true);
-    
-  // }
-  
 
   var handleChange = (event) => {
     const replace = event.target.value.split(" ").join("_");
@@ -152,6 +141,7 @@ function PlayerComparison() {
   
     return (
       <div className="App">
+        <br/>
         <form onSubmit={handleSubmit}>
           <label>
             Name
@@ -159,10 +149,10 @@ function PlayerComparison() {
             type="text"
             
             onChange={handleChange}
-            placeholder="please enter team name"
+            placeholder="please enter player 1 name"
             />
           </label>
-          <br />
+          {"\t"}
           <label>
             Season
             <input 
@@ -179,10 +169,10 @@ function PlayerComparison() {
             type="text"
             
             onChange={handleChange2}
-            placeholder="please enter team name"
+            placeholder="please enter player 2 name"
             />
           </label>
-          <br />
+          {"\t"}
           <label>
             Season
             <input 
@@ -192,53 +182,49 @@ function PlayerComparison() {
             placeholder="please enter a year"
             />
           </label>
+          <br/>
+          <br/>
           <input type="submit" value="Submit"/>
         </form>
-        <h1>{playerName}</h1>
-        Games played: {playerStats["games_played"]}
-        <br />
-        Points averaged: {playerStats["pts"]}
-        <br />
-        Rebounds averaged: {playerStats["reb"]}
-        <br />
-        Assists averaged: {playerStats["ast"]}
-        <br/>
         
-        {/* Stats for player number 2 */}
-        {/* <form onSubmit={handleSubmit2}>
-          <label>
-            Name
-            <input
-            type="text"
+        {isSubmitted &&
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{margin: '15px'}}>
+            <h1>{playerName}</h1>
             
-            onChange={handleChange2}
-            placeholder="please enter team name"
-            />
-          </label>
-          <br />
-          <label>
-            Season
-            <input 
-            type="text"
-            
-            onChange={handleSeason2}
-            placeholder="please enter a year"
-            />
-          </label>
-          <input type="submit" value="Submit"/>
-        </form> */}
-        <h1>{playerName2}</h1>
-        Games played: {playerStats2["games_played"]}
-        <br />
-        Points averaged: {playerStats2["pts"]}
-        <br />
-        Rebounds averaged: {playerStats2["reb"]}
-        <br />
-        Assists averaged: {playerStats2["ast"]}
-
+              Games played: {playerStats["games_played"]}
+              <br />
+              Points averaged: {playerStats["pts"]}
+              <br />
+              Rebounds averaged: {playerStats["reb"]}
+              <br />
+              Assists averaged: {playerStats["ast"]}
+          </div>
+          <div style={{margin: '15px'}}>
+            <h1>{playerName2}</h1>
+              Games played: {playerStats2["games_played"]}
+              <br />
+              Points averaged: {playerStats2["pts"]}
+              <br />
+              Rebounds averaged: {playerStats2["reb"]}
+              <br />
+              Assists averaged: {playerStats2["ast"]}
+          </div>
+      </div>
+        }
+        
         {isSubmitted && 
-        <BarChart chartData={combinedPlayerData}/>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '50vh',
+        }}>   
+          <BarChart chartData={combinedPlayerData}/>
+        </div>
+        
        }
+       
       </div>
     );
 
