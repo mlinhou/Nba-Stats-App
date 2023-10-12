@@ -1,6 +1,6 @@
 import BarChart from "./BarChart";
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function PlayerComparison() {
   const [playerName, setPlayerName] = useState('');
@@ -38,14 +38,20 @@ function PlayerComparison() {
       })
 
   }
-  var handleSubmit = (e) => {
+
+
+  var handleSubmit = async (e) => {
     e.preventDefault();
     getPlayerId()
     getPlayerId2()
-    handleCombiningData();
     setisSubmitted(true);
+    console.log(combinedPlayerData)
    
   }
+  //fixes the bug where you had to click submit twice for data to show up
+  useEffect(() => {
+    handleCombiningData();
+  }, [playerData, playerData2])
 
   var handleChange = (event) => {
     const replace = event.target.value.split(" ").join("_");
@@ -137,6 +143,10 @@ function PlayerComparison() {
     })
   }
 
+  var capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   
   
     return (
@@ -190,25 +200,25 @@ function PlayerComparison() {
         {isSubmitted &&
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <div style={{margin: '15px'}}>
-            <h1>{playerName}</h1>
+            <h1>{capitalize(playerName)}{" "}{season}</h1>
             
-              Games played: {playerStats["games_played"]}
+              Games: {playerStats["games_played"]}
               <br />
-              Points averaged: {playerStats["pts"]}
+              Points: {playerStats["pts"]}
               <br />
-              Rebounds averaged: {playerStats["reb"]}
+              Rebounds: {playerStats["reb"]}
               <br />
-              Assists averaged: {playerStats["ast"]}
+              Assists: {playerStats["ast"]}
           </div>
           <div style={{margin: '15px'}}>
-            <h1>{playerName2}</h1>
-              Games played: {playerStats2["games_played"]}
+            <h1>{capitalize(playerName2)}{" "}{season2}</h1>
+              Games: {playerStats2["games_played"]}
               <br />
-              Points averaged: {playerStats2["pts"]}
+              Points: {playerStats2["pts"]}
               <br />
-              Rebounds averaged: {playerStats2["reb"]}
+              Rebounds: {playerStats2["reb"]}
               <br />
-              Assists averaged: {playerStats2["ast"]}
+              Assists: {playerStats2["ast"]}
           </div>
       </div>
         }
