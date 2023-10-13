@@ -151,6 +151,7 @@ function PlayerComparison() {
   
     return (
       <div className="App">
+        
         <br/>
         <form onSubmit={handleSubmit}>
           <label>
