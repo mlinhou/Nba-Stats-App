@@ -106,7 +106,12 @@ function Players() {
           </label>
           <input type="submit" value="Submit"/>
         </form>
-       
+        <br/>
+        
+        
+
+       {isSubmitted && 
+        <h1>
         Games played: {playerStats["games_played"]}
         <br />
         Points averaged: {playerStats["pts"]}
@@ -114,9 +119,7 @@ function Players() {
         Rebounds averaged: {playerStats["reb"]}
         <br />
         Assists averaged: {playerStats["ast"]}
-
-       {isSubmitted && 
-        <BarChart chartData={playerData}/>
+      </h1>
        }
       </div>
     );

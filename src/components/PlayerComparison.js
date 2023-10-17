@@ -1,6 +1,6 @@
 import BarChart from "./BarChart";
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function PlayerComparison() {
   const [playerName, setPlayerName] = useState('');
@@ -21,8 +21,6 @@ function PlayerComparison() {
 
   const [combinedPlayerData, setCombinedPlayerData] = useState('');
 
-
-
   const [isSubmitted, setisSubmitted] = useState(false);
   
   var handleCombiningData = () => {
@@ -40,20 +38,20 @@ function PlayerComparison() {
       })
 
   }
-  var handleSubmit = (e) => {
+
+
+  var handleSubmit = async (e) => {
     e.preventDefault();
     getPlayerId()
+    getPlayerId2()
+    setisSubmitted(true);
+    console.log(combinedPlayerData)
    
   }
-
-  var handleSubmit2 = (e) => {
-    e.preventDefault();
-    getPlayerId2()
+  //fixes the bug where you had to click submit twice for data to show up
+  useEffect(() => {
     handleCombiningData();
-    setisSubmitted(true);
-    
-  }
-  
+  }, [playerData, playerData2])
 
   var handleChange = (event) => {
     const replace = event.target.value.split(" ").join("_");
@@ -145,10 +143,16 @@ function PlayerComparison() {
     })
   }
 
+  var capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   
   
     return (
       <div className="App">
+        
+        <br/>
         <form onSubmit={handleSubmit}>
           <label>
             Name
@@ -156,10 +160,10 @@ function PlayerComparison() {
             type="text"
             
             onChange={handleChange}
-            placeholder="please enter team name"
+            placeholder="please enter player 1 name"
             />
           </label>
-          <br />
+          {"\t"}
           <label>
             Season
             <input 
@@ -169,29 +173,17 @@ function PlayerComparison() {
             placeholder="please enter a year"
             />
           </label>
-          <input type="submit" value="Submit"/>
-        </form>
-        
-        Games played: {playerStats["games_played"]}
-        <br />
-        Points averaged: {playerStats["pts"]}
-        <br />
-        Rebounds averaged: {playerStats["reb"]}
-        <br />
-        Assists averaged: {playerStats["ast"]}
-        
-        {/* Stats for player number 2 */}
-        <form onSubmit={handleSubmit2}>
+          <br/>
           <label>
             Name
             <input
             type="text"
             
             onChange={handleChange2}
-            placeholder="please enter team name"
+            placeholder="please enter player 2 name"
             />
           </label>
-          <br />
+          {"\t"}
           <label>
             Season
             <input 
@@ -201,19 +193,50 @@ function PlayerComparison() {
             placeholder="please enter a year"
             />
           </label>
+          <br/>
+          <br/>
           <input type="submit" value="Submit"/>
         </form>
-        Games played: {playerStats2["games_played"]}
-        <br />
-        Points averaged: {playerStats2["pts"]}
-        <br />
-        Rebounds averaged: {playerStats2["reb"]}
-        <br />
-        Assists averaged: {playerStats2["ast"]}
-
+        
+        {isSubmitted &&
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{margin: '15px'}}>
+            <h1>{capitalize(playerName)}{" "}{season}</h1>
+            
+              Games: {playerStats["games_played"]}
+              <br />
+              Points: {playerStats["pts"]}
+              <br />
+              Rebounds: {playerStats["reb"]}
+              <br />
+              Assists: {playerStats["ast"]}
+          </div>
+          <div style={{margin: '15px'}}>
+            <h1>{capitalize(playerName2)}{" "}{season2}</h1>
+              Games: {playerStats2["games_played"]}
+              <br />
+              Points: {playerStats2["pts"]}
+              <br />
+              Rebounds: {playerStats2["reb"]}
+              <br />
+              Assists: {playerStats2["ast"]}
+          </div>
+      </div>
+        }
+        
         {isSubmitted && 
-        <BarChart chartData={combinedPlayerData}/>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '500px',
+          margin: '50px'
+        }}>   
+          <BarChart chartData={combinedPlayerData}/>
+        </div>
+        
        }
+       
       </div>
     );
 
