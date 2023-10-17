@@ -1,8 +1,8 @@
 import "./App.css";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Navbar from "./Navbar";
-import Players from "./Players";
-import PlayerComparison from "./PlayerComparison";
+import Navbar from "./components/Navbar";
+import Players from "./components/Players";
+import PlayerComparison from "./components/PlayerComparison";
 import React, { useState, useEffect } from 'react';
 import './DarkMode.css';
 function App() {
