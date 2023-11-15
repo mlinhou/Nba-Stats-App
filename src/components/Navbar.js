@@ -15,7 +15,7 @@ function Navbar() {
   }, [location])
 
   return (
-    <div className="navbar" id={expandNavbar ? "open" : "close"}>
+    <div data-testid="navbar-1"className="navbar" id={expandNavbar ? "open" : "close"}>
       <div className="links">
         <Link to="/Players/"> Players </Link>
         <Link to="/PlayerComparison">  Compare </Link>

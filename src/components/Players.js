@@ -85,26 +85,26 @@ function Players() {
     return (
       <div className="App">
         <form onSubmit={handleSubmit}>
-          <label>
+          <label data-testid="player-text">
             Name
             <input
             type="text"
-            
+            data-testid="input"
             onChange={handleChange}
             placeholder="please enter player name"
             />
           </label>
           <br />
-          <label>
+          <label data-testid="season-text">
             Season
             <input 
             type="text"
-            
+            data-testid="season-input"
             onChange={handleSeason}
             placeholder="please enter a year"
             />
           </label>
-          <input type="submit" value="Submit"/>
+          <input data-testid="submit-btn" type="submit" value="Submit"/>
         </form>
         <br/>
         
