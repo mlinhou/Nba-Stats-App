@@ -2,6 +2,7 @@
   "name": "nbaapipull",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mlinhou.github.io/Nba-Stats-App/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
@@ -42,6 +45,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
+    "gh-pages": "^6.1.1",
     "react-test-renderer": "^18.2.0"
   }
 }
