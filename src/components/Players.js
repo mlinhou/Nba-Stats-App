@@ -1,5 +1,5 @@
 
-import BarChart from "./BarChart";
+
 import axios from 'axios';
 import React, { useState } from 'react';
 
@@ -10,16 +10,6 @@ function Players() {
   const [playerStats, setPlayerStats] = useState('');
 
   const [season, setSeason] = useState('');
-
-  const [playerData, setPlayerData] = useState({
-    labels: ["Points", "Rebounds", "Assists"],
-    datasets: [{
-      label: "Averages",
-      data: playerStats,
-      
-    }]
-  })
-
 
   const [isSubmitted, setisSubmitted] = useState(false);
   
@@ -68,14 +58,6 @@ function Players() {
     .then(async res => {
       
       setPlayerStats(res.data.data[0])
-
-      setPlayerData({
-        labels: ["Points", "Rebounds", "Assists"],
-        datasets: [{
-          label: `${playerName}`,
-          data: [res.data.data[0].pts, res.data.data[0].reb, res.data.data[0].ast]
-        }]
-      })
 
     }).catch(err => {
       console.log(err)
